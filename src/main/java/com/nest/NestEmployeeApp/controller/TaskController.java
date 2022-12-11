@@ -1,6 +1,7 @@
 package com.nest.NestEmployeeApp.controller;
 
 import com.nest.NestEmployeeApp.dao.TaskDao;
+import com.nest.NestEmployeeApp.models.Employee;
 import com.nest.NestEmployeeApp.models.Task;
 import org.hibernate.annotations.Any;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,9 @@ public class TaskController {
         return tdao.GetTask();
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/viewTask", consumes = "application/json", produces = "application/json")
+    public List<Task> ViewTask(@RequestBody Task task){
+        return (List<Task>) tdao.GetEmpTask(task.getEmpId());
+    }
 }
