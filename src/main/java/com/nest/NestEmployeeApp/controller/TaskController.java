@@ -68,4 +68,13 @@ public class TaskController {
         return (List<Map<String, String>>) tdao.SearchTask(emp.getEmpName());
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/deleteTask", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> deleteTask(@RequestBody Task task){
+        tdao.DeleteTask( String.valueOf(task.getId()));
+        HashMap<String, String> status = new HashMap<>();
+        status.put("status","success");
+        return status;
+    }
+
 }
