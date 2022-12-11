@@ -3,13 +3,11 @@ package com.nest.NestEmployeeApp.controller;
 import com.nest.NestEmployeeApp.dao.EmployeeDao;
 import com.nest.NestEmployeeApp.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EmployeeController {
@@ -30,4 +28,15 @@ public class EmployeeController {
         return hashMap;
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getEmployee")
+    public List<Employee> GetEmployee(){
+        return (List<Employee>) empdao.findAll();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchEmployee", consumes = "application/json", produces = "application/json")
+    public List<Employee> searchEmployee(@RequestBody Employee emp){
+        return (List<Employee>) empdao.searchEmployee(emp.getEmpName());
+    }
 }

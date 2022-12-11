@@ -53,4 +53,18 @@ public class TaskController {
         status.put("status","success");
         return status;
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/viewAllTask")
+    public List<Map<String, String>> ViewAllTask(){
+        List<Map<String, String>> result = (List<Map<String, String>>) tdao.viewTask();
+        return result;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchTask", consumes = "application/json", produces = "application/json")
+    public List<Map<String, String>> searchTask(@RequestBody Employee emp){
+        return (List<Map<String, String>>) tdao.SearchTask(emp.getEmpName());
+    }
+
 }
