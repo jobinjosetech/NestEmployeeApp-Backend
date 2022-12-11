@@ -24,6 +24,7 @@ public class EmployeeController {
             hashMap.put("status","failed");
         }else{
             hashMap.put("status","success");
+            hashMap.put("userId",String.valueOf(employees.get(0).getId()));
         }
         return hashMap;
     }

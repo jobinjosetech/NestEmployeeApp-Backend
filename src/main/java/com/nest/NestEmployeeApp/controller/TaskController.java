@@ -48,7 +48,8 @@ public class TaskController {
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/updateStatus", consumes = "application/json", produces = "application/json")
     public HashMap<String, String> UpdateTaskStatus(@RequestBody Task task){
-        tdao.UpdateStatus(task.getId(), task.isTaskStatus());
+        LocalDateTime now = LocalDateTime.now();
+        tdao.UpdateStatus(task.getId(), task.isTaskStatus(), dtf.format(now));
         HashMap<String, String> status = new HashMap<>();
         status.put("status","success");
         return status;
@@ -57,7 +58,7 @@ public class TaskController {
     @CrossOrigin(origins = "*")
     @GetMapping("/viewAllTask")
     public List<Map<String, String>> ViewAllTask(){
-        List<Map<String, String>> result = (List<Map<String, String>>) tdao.viewTask();
+        List<Map<String, String>> result = (List<Map<String, String>>) tdao.GetTask();
         return result;
     }
 
