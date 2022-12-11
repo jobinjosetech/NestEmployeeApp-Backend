@@ -32,6 +32,7 @@ public class TaskController {
         return status;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/viewStatusTask")
     public List<Map<String, String>> ViewStatusTask(){
         System.out.println();
