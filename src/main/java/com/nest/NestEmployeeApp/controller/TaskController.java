@@ -43,4 +43,13 @@ public class TaskController {
     public List<Task> ViewTask(@RequestBody Task task){
         return (List<Task>) tdao.GetEmpTask(task.getEmpId());
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/updateStatus", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> UpdateTaskStatus(@RequestBody Task task){
+        tdao.UpdateStatus(task.getId(), task.isTaskStatus());
+        HashMap<String, String> status = new HashMap<>();
+        status.put("status","success");
+        return status;
+    }
 }
